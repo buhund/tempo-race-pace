@@ -11,10 +11,15 @@
 </p>
 
 <p>Time
+    <InputNumber class="input input-time-hours"
+                 placeholder="hours"
+                 @bind-Value="_timeHours" /> :
     <InputNumber class="input input-time-minutes"
-                 @bind-Value="_timeMinutes" /> min
+                 placeholder="minutes"
+                 @bind-Value="_timeMinutes" /> :
     <InputNumber class="input input-time-seconds"
-                 @bind-Value="_timeSeconds" /> sec
+                 placeholder="seconds"
+                 @bind-Value="_timeSeconds" />
 </p>
 
 <p>
@@ -39,7 +44,9 @@
 
     private string? _errorMessage;
     private string? _paceResult;
+
     private decimal _distance = 0;
+    private int _timeHours = 0;
     private int _timeMinutes = 0;
     private int _timeSeconds = 0;
 
@@ -54,7 +61,7 @@
         _timeMinutes = Math.Abs(_timeMinutes);
         _timeSeconds = Math.Abs(_timeSeconds);
 
-        int totalSeconds = (_timeMinutes * 60) + _timeSeconds;
+        int totalSeconds = (_timeHours * 3600) + (_timeMinutes * 60) + _timeSeconds;
 
         if (_distance <= 0)
         {
@@ -71,6 +78,7 @@
 
         decimal paceSeconds = totalSeconds / _distance; // in seconds per km
 
+        int hours = (int)(paceSeconds / 3600);
         int minutes = (int)(paceSeconds / 60);
         int seconds = (int)(paceSeconds % 60);
 
@@ -80,7 +88,13 @@
             seconds = 0;
         }
 
-        _paceResult = $"{minutes:D2}:{seconds:D2} per km";
+        if (minutes == 60)
+        {
+            hours++ ;
+            minutes = 0;
+        }
+
+        _paceResult = $"{minutes:D2}:{seconds:D2} min/km";
     }
 
 }
