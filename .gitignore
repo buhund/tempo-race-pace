@@ -1,0 +1,132 @@
+############################
+# .NET / C# / Blazor
+############################
+
+# Build results
+bin/
+obj/
+out/
+
+# Test results
+TestResults/
+coverage/
+coverage.*.xml
+
+# Publish output
+publish/
+wwwroot/_framework/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# ASP.NET
+appsettings.Development.json
+appsettings.Local.json
+
+# Logs
+*.log
+
+############################
+# Visual Studio
+############################
+
+.vs/
+*.user
+*.rsuser
+*.suo
+*.userprefs
+*.vcxproj.user
+
+############################
+# JetBrains Rider / IntelliJ
+############################
+
+.idea/
+*.sln.iml
+
+############################
+# VS Code
+############################
+
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+############################
+# Blazor WebAssembly
+############################
+
+# Generated during build
+wwwroot/service-worker-assets.js
+
+############################
+# Node / frontend (if used)
+############################
+
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+############################
+# Linux (KDE + general)
+############################
+
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+############################
+# macOS
+############################
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Finder / system files
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+############################
+# Windows (cross-platform repos)
+############################
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+
+############################
+# Editor temp / recovery files
+############################
+
+# Kate / KWrite
+.*.kate-swp
+.*.kate-swp~
+*.kate-swp
+*.kate-swp~
+
+# Generic editor swap / backup files
+*.swp
+*.swo
+*.swx
+*.tmp
+*.temp
+*.bak
+*.orig
+*.save
+
+# Hidden temp files (common on Linux editors)
+.#*

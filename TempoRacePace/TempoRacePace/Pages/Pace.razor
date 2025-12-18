@@ -1,0 +1,86 @@
+@page "/pace"
+@inject HttpClient Http
+
+<PageTitle>Pace Calculator</PageTitle>
+
+<h1>Pace and Speed Calculator</h1>
+
+<p>Distance
+    <InputNumber class="input input-distance"
+                 @bind-Value="_distance" /> km
+</p>
+
+<p>Time
+    <InputNumber class="input input-time-minutes"
+                 @bind-Value="_timeMinutes" /> min
+    <InputNumber class="input input-time-seconds"
+                 @bind-Value="_timeSeconds" /> sec
+</p>
+
+<p>
+    <button class="btn btn-primary" type="button" @onclick="CalculatePace">
+        Calculate
+    </button>
+</p>
+
+@if (_errorMessage != null)
+{
+    <p class="text-danger">@_errorMessage</p>
+}
+
+@if (_paceResult != null)
+{
+    <p><strong>Pace:</strong> @_paceResult</p>
+}
+
+
+
+@code {
+
+    private string? _errorMessage;
+    private string? _paceResult;
+    private decimal _distance = 0;
+    private int _timeMinutes = 0;
+    private int _timeSeconds = 0;
+
+
+    private void CalculatePace()
+    {
+        _errorMessage = null;
+        _paceResult = null;
+
+        // Silently convert negative inputs to positive
+        _distance = Math.Abs(_distance);
+        _timeMinutes = Math.Abs(_timeMinutes);
+        _timeSeconds = Math.Abs(_timeSeconds);
+
+        int totalSeconds = (_timeMinutes * 60) + _timeSeconds;
+
+        if (_distance <= 0)
+        {
+            _errorMessage = "Distance must be greater than zero.";
+            return;
+        }
+
+        if (totalSeconds <= 0)
+        {
+            _errorMessage = "Time must be greater than zero.";
+            return;
+        }
+
+
+        decimal paceSeconds = totalSeconds / _distance; // in seconds per km
+
+        int minutes = (int)(paceSeconds / 60);
+        int seconds = (int)(paceSeconds % 60);
+
+        if (seconds == 60)
+        {
+            minutes++ ;
+            seconds = 0;
+        }
+
+        _paceResult = $"{minutes:D2}:{seconds:D2} per km";
+    }
+
+}
